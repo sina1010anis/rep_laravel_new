@@ -13,14 +13,14 @@ class Car extends Model
 
     protected $fillable = ['name', 'model', 'published'];
 
-    public function scopeGetGoodData(Builder $builder): Builder
+    public function scopeGetGoodData(Builder $builder): Builder // Local Scope
     {
 
         return $builder->wherePublished(true)->latest('id')->limit(10);
 
     }
 
-    protected static function booted(): void
+    protected static function booted(): void // Global Scope
     {
 
         static::addGlobalScope(new GetGoodData());
